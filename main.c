@@ -25,7 +25,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    printf("%d", server_fd);
+
 // Forcefully attaching socket to the port 8080
     if (setsockopt(server_fd, SOL_SOCKET,
                    SO_REUSEADDR | SO_REUSEPORT, &opt,
