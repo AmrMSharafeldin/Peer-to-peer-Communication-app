@@ -1,5 +1,5 @@
 all: 
 	gcc -o exec main.c
 client: 
-	gcc -0 client client.c
+	gcc -o client client.c
 clean: 
