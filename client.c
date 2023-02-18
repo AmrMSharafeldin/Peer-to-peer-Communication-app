@@ -1,11 +1,11 @@
-// Client side C/C++ program to demonstrate Socket
-// programming
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #define PORT 8080
+// Client side C/C++ program to demonstrate Socket
+// programming
 
 int main(int argc, char const* argv[])
 {
