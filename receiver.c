@@ -8,8 +8,8 @@
 #define PORT 6969
 #define MAX_LEN 1024
 #define ID_ADDR "127.0.0.1"
-static int sock;
-void init_socket()
+//static int sock;
+int init_socket()
 {
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
@@ -19,7 +19,7 @@ void init_socket()
     int socketDescriptor = socket(PF_INET, SOCK_DGRAM, 0);
 
     bind(socketDescriptor, (struct sockaddr* ) &sin, sizeof(sin));
-    sock = socketDescriptor;
+    return socketDescriptor;
 }
 
 void lis(int sock)
@@ -42,7 +42,7 @@ void lis(int sock)
 
 int main()
 {
-    init_socket();
+    int sock = init_socket();
     lis(sock);
 
 }
