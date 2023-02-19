@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+struct sockaddr_in sin;
+struct sockaddr_in sinRemote;
+int init_socket_receiver(); 
 
-//void init_socket(); 
-
-//void* listen(void* pt, int sock);
+void lis(int sock);
