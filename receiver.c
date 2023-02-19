@@ -1,4 +1,4 @@
-#include "receiver.h"
+//#include "receiver.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <netdb.h>
@@ -22,7 +22,7 @@ void init_socket()
     sock = socketDescriptor;
 }
 
-void* listen(void* pt, int sock)
+void lis(int sock)
 {
     while(1)
     {
@@ -43,6 +43,6 @@ void* listen(void* pt, int sock)
 int main()
 {
     init_socket();
-    listen(NULL, sock);
-    
+    lis(sock);
+
 }

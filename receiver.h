@@ -4,6 +4,6 @@
 #include <string.h>
 #include <unistd.h>
 
-void init_socket(); 
+//void init_socket(); 
 
-void* listen(void* pt, int sock);
+//void* listen(void* pt, int sock);
