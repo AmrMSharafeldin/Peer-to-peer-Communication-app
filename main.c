@@ -9,6 +9,11 @@
 
 int main()
 {
+    int a;
 
+    pthread_t list;
+    pthread_create(&list, NULL, listenThread, NULL);
+    //killListenThread();
+    pthread_join(list, NULL);
 
 }

@@ -1,7 +1,7 @@
 all: exec
 
 exec: screen.o keyboard.o receiver.o sender.o 
-	gcc -Wall -o exec screen.o keyboard.o receiver.o sender.o main.c
+	gcc -Wall -o exec screen.o keyboard.o receiver.o sender.o main.c -pthread
 
 screen.o: screen.h screen.c
 	gcc -Wall -c screen.c
