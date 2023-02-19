@@ -11,14 +11,14 @@
 //static int sock;
 int init_socket()
 {
-    // struct sockaddr_in sin;
-    // memset(&sin, 0, sizeof(sin));
-    // sin.sin_family = AF_INET;
-    // sin.sin_addr.s_addr = htonl("127.0.0.1");
-    // sin.sin_port = htons(PORT);
-    // int socketDescriptor = socket(PF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in sin;
+    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    sin.sin_addr.s_addr = htonl("127.0.0.1");
+    sin.sin_port = htons(PORT);
+    int socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0);
 
-    // bind(socketDescriptor, (struct sockaddr* ) &sin, sizeof(sin));
+    bind(socketDescriptor, (struct sockaddr* ) &sin, sizeof(sin));
     //return socketDescriptor;
 }
 
@@ -42,37 +42,26 @@ void lis(int sock)
 
 int main()
 {
+    // int sock = init_socket();
+    // lis(sock);
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = htonl("127.0.0.1");
     sin.sin_port = htons(PORT);
-    int socketDescriptor = socket(PF_INET, SOCK_DGRAM, 0);
+    int socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0);
 
     bind(socketDescriptor, (struct sockaddr* ) &sin, sizeof(sin));
-    while(1){
-        fflush(stdout);
-        struct sockaddr_in sinR;
-        int sin_len = sizeof(sinR);
+    while(1)
+    {
+        struct sockaddr_in sinRemote;
+        unsigned int sin_len = sizeof(sinRemote);
         char messageRx[MAX_LEN];
+        int bytesRx = recvfrom(socketDescriptor, messageRx, MAX_LEN, 0, (struct sockaddr_in*) &sinRemote, &sin_len);
         
-        listen(socketDescriptor, 10);
-        int sck = sizeof(struct sockaddr_in);
-        int client = accept(socketDescriptor, (struct sockaddr* )& sinR, (socklen_t*)& sck );
-        int size = recv(client, messageRx, MAX_LEN, 0);
+        int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN -1;
+        printf("Message received (%d): \n%s \n", bytesRx, messageRx);
 
-       
-        int terminateIdx = (size < MAX_LEN) ? size : MAX_LEN -1;
-        printf("Message received: \n%s \n", messageRx);
-        
-        
-        
-        
-    }
         //int incMe = atoi(messageRx);
-
-    // int sock = init_socket();
-    // printf("%d", sock);
-    // lis(sock);
-
+    }
 }
