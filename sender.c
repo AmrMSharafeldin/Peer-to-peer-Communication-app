@@ -1,29 +1,43 @@
-#include<stdio.h>
-#include<string.h>	//strlen
-#include<sys/socket.h>
-#include<arpa/inet.h>	//inet_addr
-#include <stdlib.h>
-#include <netdb.h>
-#include <unistd.h>
-#define PORT 8080
-#define MAX_LEN 1024
-// Socket address 
+
+#include "sender.h"
+
+// Function to init the Socket for() 
+ 
+// Desc : 
+
+// Creates and new socket with the given socket socket adress 
+// Establishes the connection to this port 
 
 
-int main(){
-       // create the socket addresss 
-   struct sockaddr_in sin; 
-   sin.sin_addr.s_addr = htonl(INADDR_ANY);
-   sin.sin_family = AF_INET; 
-   sin.sin_port = htons(PORT);
+int init_socket_client(){
 
-   int  sock; 
-   sock = socket(PF_INET , SOCK_DGRAM , 0 ) ;
-   char* message = "test";
-   connect(sock, (struct sockaddr*)&sin,sizeof(sin)) ;
-   send(sock , message , strlen(message) , 0);
+     struct sockaddr_in socket_adress; 
+   socket_adress.sin_addr.s_addr = htonl(INADDR_ANY);
+   socket_adress.sin_family = AF_INET; 
+   socket_adress.sin_port = htons(PORT);
 
+   int  socketDescriptor; 
+   socketDescriptor = socket(PF_INET , SOCK_DGRAM , 0 ) ;
 
-	
-	return 0;
+   if (socketDescriptor < 0){
+       printf("socket field\n");
+       return -1;
+       }
+    if ((connect(socketDescriptor, (struct sockaddr*)&socket_adress,sizeof(socket_adress))) < 0){
+        printf("conncection field\n");
+        return -1; 
+    }
+    printf("new socket created and conncection established\n");
+   return socketDescriptor;
 }
+
+
+
+
+//  Desc 
+// Send the message to the given socket 
+int send_message(int socketDescriptor , char* message){
+    if (strlen(message) > MAX_LEN){printf("Message exceedes the max buffer size \n"); return -1;}
+    send(socketDescriptor , message , strlen(message) , 0);
+}
+
