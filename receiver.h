@@ -11,4 +11,3 @@ struct sockaddr_in sinRemote;
 
 void* listenThread(void* args);
 
-void killListenThread();

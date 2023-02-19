@@ -13,7 +13,7 @@ int main()
 
     pthread_t list;
     pthread_create(&list, NULL, listenThread, NULL);
-    //killListenThread();
+    killListenThread();
     pthread_join(list, NULL);
 
 }
