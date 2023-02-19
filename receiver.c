@@ -9,7 +9,7 @@
 #define MAX_LEN 1024
 
 
-int init_socket()
+int init_socket_receiver()
 {
     
     memset(&sin, 0, sizeof(sin));

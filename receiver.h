@@ -5,6 +5,6 @@
 #include <unistd.h>
 struct sockaddr_in sin;
 struct sockaddr_in sinRemote;
-int init_socket(); 
+int init_socket_receiver(); 
 
 void lis(int sock);
