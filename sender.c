@@ -18,9 +18,9 @@ int main(){
    sin.sin_port = htons(PORT);
 
    int  sock; 
-   sock = socket(AF_INET , SOCK_DGRAM , 0 ) ;
+   sock = socket(PF_INET , SOCK_DGRAM , 0 ) ;
    char* message = "test";
-   connect(sock, (struct sockaddr_in*)&sin,sizeof(sin)) ;
+   connect(sock, (struct sockaddr*)&sin,sizeof(sin)) ;
    send(sock , message , strlen(message) , 0);
 
 
