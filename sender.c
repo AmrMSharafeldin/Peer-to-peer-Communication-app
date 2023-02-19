@@ -41,3 +41,10 @@ int send_message(int socketDescriptor , char* message){
     send(socketDescriptor , message , strlen(message) , 0);
 }
 
+
+
+// For testing 
+
+int main(){
+
+    send_message(init_socket_client() , "hello world\n");}

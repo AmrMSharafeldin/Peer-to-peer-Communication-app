@@ -1,4 +1,5 @@
 #include "receiver.h"
+#include "sender.h"
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +9,7 @@
 
 int main()
 {
-
+    lis(init_socket_receiver());
+    
 
 }
