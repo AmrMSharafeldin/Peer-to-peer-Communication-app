@@ -1,4 +1,4 @@
-//#include "receiver.h"
+#include "receiver.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <netdb.h>
@@ -7,8 +7,7 @@
 #include <sys/socket.h>
 #define PORT 8080
 #define MAX_LEN 1024
-static struct sockaddr_in sin;
-static struct sockaddr_in sinRemote;
+
 
 int init_socket()
 {
@@ -37,11 +36,4 @@ void lis(int sock)
         printf("Message received (%d): \n%s \n", bytesRx, messageRx);
 
     }
-}
-
-int main()
-{
-    int sock = init_socket();
-    lis(sock);
-    
 }
