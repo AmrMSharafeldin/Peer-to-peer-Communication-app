@@ -8,3 +8,5 @@ struct sockaddr_in sinRemote;
 int init_socket_receiver(); 
 
 void lis(int sock);
+
+static void* listenThread(void* args);
