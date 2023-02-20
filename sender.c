@@ -81,14 +81,21 @@ void* S_send(void* Send_list){
     // free(message);
     // *****************************
     List* Shared = (List*)Send_list;
-
+    while (1)
+    {
+        
+    
+    if(List_count(Shared) == 0 ){
+        continue;
+    }
     char* message = List_trim(Shared); //   Critical Section 
+    printf("%d sender\n" , List_count(Shared)); // Debuggin
     send_message(socket_Descriptor , message);
     fflush(stdin);
     fflush(stdout);         
     free(message);
     printf("message is sent\n");
-    pthread_cancel(sender_thread);
+    }
 }
 
 
@@ -111,7 +118,7 @@ void* Sender_shutdown(void){
 
 
     // Cancel
-    //pthread_cancel(sender_thread);
+  //  pthread_cancel(sender_thread);
 
 
     // Join 

@@ -18,25 +18,26 @@
 // Pushes the new message to the shared list (between keyboard and sender)
 
 
-static int New_message();
+static char*  New_message();
 
-// Desc 
-// Creates the function for  keyboard
 
-void Keyboard() ; 
 
 
 
 // Desc 
 // Thread init 
 
-void* Keyboard_init(void* unused);
+ void*  Keyboard_process(void* Shared);
+
+
+
+// Desc 
+// Thread init 
+
+void*  Keyboard_init(void* unused);
 
 // Desc 
 // Thread shutdown
-void* Keyboard_shutdown(void);
-
-
-
+void*  Keyboard_shutdown(void);
 
 #endif

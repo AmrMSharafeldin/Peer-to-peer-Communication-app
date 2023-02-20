@@ -22,7 +22,7 @@ static pthread_t keyboard_thread;
 
 
 char *  New_message(){
-    printf("Please enter new message\n");
+   // printf("Please enter new message\n");
     char* new_message = malloc(MAX_LEN);
     scanf("%s", new_message);
     return new_message;
@@ -36,15 +36,39 @@ char *  New_message(){
 // Desc 
 // Thread init 
 
-void* Keyboard_init(void* unused){
+ void*  Keyboard_process(void* Arg){
+         List* Shared  = (List*)Arg;
+    while (1)
+    {
     char* message = New_message();
-    List* Shared = (List*) unused;  // Critical section;
+      // Critical section;
     List_append(Shared , message);
+        printf("%d keyboard\n" , List_count(Shared)); // Debuggin
+
+    // 
+    }
 }
+
+
+// Desc
+ // Thread create 
+
+ void* Keyboard_init(void* Arg){
+
+     pthread_create(&keyboard_thread, NULL , Keyboard_process , Arg );
+ }
 
 // Desc 
 // Thread shutdown
-void* Keyboard_shutdown(void);
+void* Keyboard_shutdown(void){
+    // Cancel
+   /// pthread_cancel(keyboard_thread);
+
+
+    // Join 
+
+    pthread_join(keyboard_thread , NULL);
+}
 
 
 
