@@ -1,17 +1,14 @@
-#include<stdio.h>
-#include<string.h>	//strlen
-#include<sys/socket.h>
-#include<arpa/inet.h>	//inet_addr
+#include <pthread.h>
+#include <sys/socket.h>
 #include <stdlib.h>
-#include <netdb.h>
+#include <string.h>
 #include <unistd.h>
+#include "list.h"
 #ifndef _sender.h
 
 
 #define PORT 8080
 #define MAX_LEN 1024
-
-
 
 // Function to init the Socket for() 
  
@@ -21,14 +18,33 @@
 // Establishes the connection to this port 
 
 
-int init_socket_client();
+static int init_socket_client();
 
 
 
 
 //  Desc 
 // Send the message to the given socket 
-int send_message(int socketDescriptor , char* message);
+static int send_message(int socketDescriptor , char* message);
+
+
+
+
+// Desc 
+// Creates the socket and send messages to the port on user input 
+
+void Send_thread() ; 
+
+
+
+// Desc 
+// Thread init 
+
+void* Sender_init(void* unused);
+
+// Desc 
+// Thread shutdown
+void* Sender_shutdown(void);
 
 
 

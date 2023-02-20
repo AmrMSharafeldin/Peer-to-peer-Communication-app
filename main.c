@@ -9,7 +9,5 @@
 
 int main()
 {
-    lis(init_socket_receiver());
-    
-
+   
 }
