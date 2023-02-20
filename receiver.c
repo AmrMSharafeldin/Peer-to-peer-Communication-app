@@ -48,7 +48,7 @@ void lis(int sock, void* Receive_List)
         int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN - 1;
         messageRx[terminateIdx] = 0;
 
-        
+        List_append(Shared, messageRx);
         printf("Message received (%d): \n%s \n", bytesRx, messageRx);
     }
 }
