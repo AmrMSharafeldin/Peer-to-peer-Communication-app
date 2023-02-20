@@ -48,7 +48,10 @@ void lis(int sock, void* Receive_List)
         int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN - 1;
         messageRx[terminateIdx] = 0;
 
-        List_append(Shared, messageRx);
+        if(List_append(Shared, messageRx)<0)
+        {
+            printf("the list append has failed\n");
+        }
         printf("Message received (%d): \n%s \n", bytesRx, messageRx);
     }
 }
