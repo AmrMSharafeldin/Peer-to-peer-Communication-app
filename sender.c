@@ -63,7 +63,7 @@ void* S_send(void* Send_list){
     // Ask the user for input 
     
     
-    printf("Please enter the message\n");
+    // printf("Please enter the message\n");
 
     // Create the buffer  // To do just pop from the shared list 
     // A critical section problem
