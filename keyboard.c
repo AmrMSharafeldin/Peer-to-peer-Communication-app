@@ -42,8 +42,10 @@ char *  New_message(){
     {
     char* message = New_message();
       // Critical section;
+    //mutex lock
     List_append(Shared , message);
-        printf("%d keyboard\n" , List_count(Shared)); // Debuggin
+    printf("%d keyboard\n" , List_count(Shared)); // Debuggin
+    //mutex unlock
 
     // 
     }

@@ -88,8 +88,10 @@ void* S_send(void* Send_list){
     if(List_count(Shared) == 0 ){
         continue;
     }
+    //mutex lock
     char* message = List_trim(Shared); //   Critical Section 
     printf("%d sender\n" , List_count(Shared)); // Debuggin
+    //mutex unlock
     send_message(socket_Descriptor , message);
     fflush(stdin);
     fflush(stdout);         

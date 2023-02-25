@@ -23,8 +23,9 @@ static void* Print_message(void* Arg){
     
     
     if(List_count(Shared) == 0){continue;}
-
+    //mutex lock
     char* message = List_remove(Shared);
+    //mutex unlock
     printf("incoming message %s \n",message);
     fflush(stdin);
     fflush(stdout); 

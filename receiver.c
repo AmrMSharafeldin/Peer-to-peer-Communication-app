@@ -52,6 +52,10 @@ void lis(int sock, void* Receive_List)
         {
             printf("the list append has failed\n");
         }
+        //mutex lock
+        if(List_append(Shared, messageRx)<0)
+            printf("the list if full, the append \n");
+        //mutex unlock
         //printf("Message received (%d): \n%s \n", bytesRx, messageRx); // To Do // Remvoe this line because it's not necessery 
     }
 }
