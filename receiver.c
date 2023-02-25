@@ -6,7 +6,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include "ThreadArgs.h"
 #define PORT 8080
 #define MAX_LEN 1024
 static pthread_t receiver_thread;

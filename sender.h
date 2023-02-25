@@ -4,7 +4,6 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#include "ThreadArgs.h"
 #ifndef _sender.h
 
 
