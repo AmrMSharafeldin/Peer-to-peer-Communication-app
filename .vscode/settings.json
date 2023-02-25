@@ -2,6 +2,7 @@
     "files.associations": {
         "socket.h": "c",
         "stdio.h": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "stdlib.h": "c"
     }
 }
