@@ -46,7 +46,7 @@ char *  New_message(){
     List_append(Shared , message);
     printf("%d keyboard\n" , List_count(Shared)); // Debuggin
     //mutex unlock
-
+    free(message);
     // 
     }
 }
