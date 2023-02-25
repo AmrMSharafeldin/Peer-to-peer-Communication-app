@@ -19,18 +19,26 @@ static void* Print_message(void* Arg){
     List* Shared  = (List*)Arg;
     while (1)
     {
-        
-    
-    
-    if(List_count(Shared) == 0){continue;}
-    //mutex lock
-    char* message = List_remove(Shared);
-    //mutex unlock
-    printf("incoming message %s \n",message);
-    fflush(stdin);
-    fflush(stdout); 
-    //free(message); // To Do Fix that bug becasue it gave double free erorr ??
-}
+        if(List_count(Shared) == 0){continue;}
+
+        pthread_mutex_lock(&LockIn);
+        {
+            pthread_cond_wait(&kToPrint, &LockIn);
+
+            int n = List_count(Shared);
+
+            while(n!=0){
+                char* message = List_trim(Shared);
+                printf("A new message: %s", message);
+                free(message);
+                n--;
+            } 
+        }
+        pthread_mutex_unlock(&LockIn);
+        fflush(stdin);
+        fflush(stdout); 
+        //free(message); // To Do Fix that bug becasue it gave double free erorr ??
+    }
 }
 
 
