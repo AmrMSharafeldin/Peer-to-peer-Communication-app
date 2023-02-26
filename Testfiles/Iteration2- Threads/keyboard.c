@@ -25,6 +25,7 @@ char *  New_message(){
    // printf("Please enter new message\n");
     char* new_message = malloc(MAX_LEN);
     scanf("%s", new_message);
+    fflush(stdin);
     return new_message;
     // To do : add the exception handleing 
 }

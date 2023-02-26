@@ -30,7 +30,7 @@ static void* Print_message(void* Arg){
             n = List_count(Shared);
             while(n!=0){
                 char* message = List_trim(Shared);
-                printf("A new message: %s\n", message);
+                //printf("A new message: %s\n", message);
                 n--;
                 
             } 
