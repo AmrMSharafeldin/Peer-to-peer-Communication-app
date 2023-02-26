@@ -11,6 +11,7 @@
 static pthread_t receiver_thread;
 //initialize the socket and bind it to specific port
 //
+
 int init_socket_receiver()
 {
 
@@ -48,15 +49,21 @@ void lis(int sock, void* Receive_List)
         int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN - 1;
         messageRx[terminateIdx] = 0;
 
-        if(List_append(Shared, messageRx)<0)
-        {
-            printf("the list append has failed\n");
-        }
+        
         //mutex lock
-        if(List_append(Shared, messageRx)<0)
-            printf("the list if full, the append \n");
+        pthread_mutex_lock(&LockIn);
+        {
+            if(List_prepend(Shared, messageRx)<0)
+            {
+                printf("the list append has failed\n");
+            }
+            else
+            pthread_cond_signal(&kToPrint);
+        }
+        pthread_mutex_unlock(&LockIn);
+       
         //mutex unlock
-        //printf("Message received (%d): \n%s \n", bytesRx, messageRx); // To Do // Remvoe this line because it's not necessery 
+        //printf("Message received (%d): \n%s \n", bytesRx, messageRx); // To Do // Remove this line because it's not necessery 
     }
 }
 //thread wrapper to run subroutines

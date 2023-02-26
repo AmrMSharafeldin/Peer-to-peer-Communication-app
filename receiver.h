@@ -6,6 +6,8 @@
 struct sockaddr_in sin;
 struct sockaddr_in sinRemote;
 //int init_socket_receiver(); 
+static pthread_mutex_t LockIn = PTHREAD_MUTEX_INITIALIZER;
+static pthread_cond_t kToPrint = PTHREAD_COND_INITIALIZER;
 
 //void lis(int sock);
 
