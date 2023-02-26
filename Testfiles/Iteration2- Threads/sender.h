@@ -7,7 +7,7 @@
 #ifndef _sender.h
 
 
-#define PORT 8080
+//#define PORT 8080
 #define MAX_LEN 1024
 
 
@@ -42,7 +42,7 @@ void Send_thread() ;
 // Desc 
 // Thread init 
 
-void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock);
+void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock, char* IP_ADDRESS  , short SERVER_PORT);
 
 // Desc 
 // Thread shutdown

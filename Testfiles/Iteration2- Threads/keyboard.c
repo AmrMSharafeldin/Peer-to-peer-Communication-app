@@ -6,7 +6,8 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-
+#include <string.h>
+static int count = 0;
 
 
 #define MAX_LEN 1024
@@ -24,8 +25,11 @@ static pthread_mutex_t* Keyboard_Lock;
 char *  New_message(){
    // printf("Please enter new message\n");
     char* new_message = malloc(MAX_LEN);
-    scanf("%s", new_message);
-    fflush(stdin);
+    fgets( new_message, MAX_LEN, stdin);
+    if((strlen(new_message) > 0)&& (new_message[strlen(new_message)-1] == '\n'))
+    {
+        new_message[strlen(new_message) - 1] = '\0';
+    }
     return new_message;
     // To do : add the exception handleing 
 }

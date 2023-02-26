@@ -1,4 +1,3 @@
-
 #include "sender.h"
 
 #include <pthread.h>
@@ -20,12 +19,19 @@
 static pthread_t sender_thread;
 static pthread_cond_t* Sender_Cond ;
 static pthread_mutex_t* Sender_Lock;
+
+// Connection parameter 
+    char* IP_ADDRESS_Sender ; 
+    short SERVER_PORT_Sender ;
+
+
+
 int init_socket_client(){
 
      struct sockaddr_in socket_adress; 
-   socket_adress.sin_addr.s_addr = htonl(INADDR_ANY);
+   socket_adress.sin_addr.s_addr = htonl(IP_ADDRESS_Sender);
    socket_adress.sin_family = AF_INET; 
-   socket_adress.sin_port = htons(PORT);
+   socket_adress.sin_port = htons(SERVER_PORT_Sender);
 
    int  socketDescriptor; 
    socketDescriptor = socket(PF_INET , SOCK_DGRAM , 0 ) ;
@@ -71,7 +77,7 @@ void* S_send(void* Send_list){
     // The first one is shared between the Screen and Receive thread
     // The second is shared between the Sender and keyboard 
 
-    //***** for testing purposes 
+    //*** for testing purposes 
 
     // char* message = malloc(MAX_LEN); 
     // scanf("%s" , message);
@@ -79,7 +85,7 @@ void* S_send(void* Send_list){
     // fflush(stdin);
     // fflush(stdout);
     // free(message);
-    // *****************************
+    // ***********
     List* Shared = (List*)Send_list;
      int counter = 0 ;
     while (1)
@@ -107,9 +113,11 @@ void* S_send(void* Send_list){
 // Desc 
 // Thread init 
 
-void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock){
+void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock, char* IP_ADDRESS  , short SERVER_PORT){
     Sender_Cond = Cond;
     Sender_Lock = Lock;
+    SERVER_PORT_Sender = SERVER_PORT; 
+    IP_ADDRESS_Sender= IP_ADDRESS;
     pthread_create(&sender_thread, NULL , S_send , Arg );
 
 }
