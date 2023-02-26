@@ -10,6 +10,8 @@
 #define PORT 8080
 #define MAX_LEN 1024
 
+
+
 // Function to init the Socket for() 
  
 // Desc : 
@@ -40,7 +42,7 @@ void Send_thread() ;
 // Desc 
 // Thread init 
 
-void* Sender_init(void* unused);
+void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock);
 
 // Desc 
 // Thread shutdown

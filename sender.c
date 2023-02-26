@@ -63,7 +63,6 @@ void* S_send(void* Send_list){
     // Ask the user for input 
     
     
-    printf("Please enter the message\n");
 
     // Create the buffer  // To do just pop from the shared list 
     // A critical section problem
@@ -82,16 +81,17 @@ void* S_send(void* Send_list){
     // *****************************
     List* Shared = (List*)Send_list;
     while (1)
-    {
-        
-    
-    if(List_count(Shared) == 0 ){
-        continue;
+    {    printf("Please enter the message\n");
+
+            //mutex lock
+    pthread_mutex_lock(&LockSender);    
+    while(List_count(Shared) == 0){
+        pthread_cond_wait(&KToSend ,&LockSender );
     }
-    //mutex lock
     char* message = List_trim(Shared); //   Critical Section 
     printf("%d sender\n" , List_count(Shared)); // Debuggin
-    //mutex unlock
+        //mutex unlock
+    pthread_mutex_unlock(&LockSender);
     send_message(socket_Descriptor , message);
     fflush(stdin);
     fflush(stdout);         

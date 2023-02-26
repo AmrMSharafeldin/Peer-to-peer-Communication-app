@@ -18,7 +18,8 @@
 // Establishes the connection to this port 
 
 static pthread_t sender_thread;
-
+static pthread_cond_t* Sender_Cond ;
+static pthread_mutex_t* Sender_Lock;
 int init_socket_client(){
 
      struct sockaddr_in socket_adress; 
@@ -63,7 +64,6 @@ void* S_send(void* Send_list){
     // Ask the user for input 
     
     
-    printf("Please enter the message\n");
 
     // Create the buffer  // To do just pop from the shared list 
     // A critical section problem
@@ -81,20 +81,21 @@ void* S_send(void* Send_list){
     // free(message);
     // *****************************
     List* Shared = (List*)Send_list;
+     int counter = 0 ;
     while (1)
-    {
-        
-    
-    if(List_count(Shared) == 0 ){
-        continue;
+    {    printf("Please enter the message\n");
+   
+            //mutex lock
+    pthread_mutex_lock(Sender_Lock);    
+    while(List_count(Shared) <= 0){
+        pthread_cond_wait(Sender_Cond ,Sender_Lock );
     }
     char* message = List_trim(Shared); //   Critical Section 
     printf("%d sender\n" , List_count(Shared)); // Debuggin
-    send_message(socket_Descriptor , message);
-    fflush(stdin);
-    fflush(stdout);         
+    send_message(socket_Descriptor , message);        
     free(message);
-    printf("message is sent\n");
+    printf("%d message is sent\n", ++counter);
+    pthread_mutex_unlock(Sender_Lock);        //mutex unlock
     }
 }
 
@@ -106,9 +107,10 @@ void* S_send(void* Send_list){
 // Desc 
 // Thread init 
 
-void* Sender_init(void* unused){
-
-    pthread_create(&sender_thread, NULL , S_send , unused );
+void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock){
+    Sender_Cond = Cond;
+    Sender_Lock = Lock;
+    pthread_create(&sender_thread, NULL , S_send , Arg );
 
 }
 

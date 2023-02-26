@@ -6,12 +6,12 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#ifndef _sender.h
+
 
 
 #define MAX_LEN 1024
-static pthread_t keyboard_thread;
-
+static pthread_cond_t* Keyboard_Cond ;
+static pthread_mutex_t* Keyboard_Lock;
 // Function to init the Socket for() 
  
 // Desc : 
@@ -42,10 +42,17 @@ char *  New_message(){
     {
     char* message = New_message();
       // Critical section;
-    List_append(Shared , message);
-        printf("%d keyboard\n" , List_count(Shared)); // Debuggin
-
-    // 
+    //mutex lock
+    pthread_mutex_lock(Keyboard_Lock);
+    {List_append(Shared , message);
+    printf("%d keyboard\n" , List_count(Shared));
+    } // critical section 
+    pthread_mutex_unlock(Keyboard_Lock);
+        //mutex unlock
+    pthread_cond_signal(Keyboard_Cond);
+     // Signal a thread 
+    // Debuggin
+    // free(message); // To avoid Mem leaks
     }
 }
 
@@ -53,8 +60,9 @@ char *  New_message(){
 // Desc
  // Thread create 
 
- void* Keyboard_init(void* Arg){
-
+ void*  Keyboard_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock ){
+     Keyboard_Cond = Cond;
+     Keyboard_Lock = Lock;
      pthread_create(&keyboard_thread, NULL , Keyboard_process , Arg );
  }
 
@@ -73,4 +81,3 @@ void* Keyboard_shutdown(void){
 
 
 
-#endif
