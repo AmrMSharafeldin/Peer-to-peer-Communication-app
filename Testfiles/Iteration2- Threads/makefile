@@ -1,6 +1,6 @@
-all: listner sender
+all: listener sender
 
-listner: screen.o receiver.o list.o
+listener: screen.o receiver.o list.o
 	gcc -Wall -o lisnter screen.o  receiver.o list.o -pthread S_talkReceive.c 
 
 	

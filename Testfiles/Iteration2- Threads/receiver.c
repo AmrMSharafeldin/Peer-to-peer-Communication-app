@@ -83,12 +83,14 @@
 #define PORT 8080
 #define MAX_LEN 1024
 static pthread_t receiver_thread;
+static pthread_cond_t* Receiver_Cond ;
+static pthread_mutex_t* Receiver_Lock;
 //initialize the socket and bind it to specific port
 //
 
 int init_socket_receiver()
 {
-
+    struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -109,7 +111,8 @@ int init_socket_receiver()
 //listening body, contains the critical section problem
 
 void lis(int sock, void* Receive_List)
-{
+{struct sockaddr_in sinRemote;
+
     if(sock == -1)
         return 0;
     List* Shared = (List*)Receive_List;
@@ -122,20 +125,17 @@ void lis(int sock, void* Receive_List)
 
         int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN - 1;
         messageRx[terminateIdx] = 0;
-
+        //printf("Message received (%d): \n%s \n", bytesRx, messageRx);
         
         //mutex lock
-        pthread_mutex_lock(&LockIn);
+        pthread_mutex_lock(Receiver_Lock);
         {
-            if(List_prepend(Shared, messageRx)<0)
-            {
-                printf("the list append has failed\n");
-            }
-            else
-            pthread_cond_signal(&kToPrint);
+            List_prepend(Shared, messageRx);
         }
-        pthread_mutex_unlock(&LockIn);
-       
+        pthread_mutex_unlock(Receiver_Lock);
+        pthread_cond_signal(Receiver_Cond);
+        
+
         //mutex unlock
         //printf("Message received (%d): \n%s \n", bytesRx, messageRx); // To Do // Remove this line because it's not necessery 
     }
@@ -148,8 +148,9 @@ void *listenThread(void *Receive_List)
     lis(desc, Receive_List);
 }
 //thread initializer // public method
-void* Receiver_init(void* Receive_List)
-{
+void* Receiver_init(void* Receive_List , pthread_cond_t* Cond , pthread_mutex_t* Lock)
+{   Receiver_Cond = Cond; 
+    Receiver_Lock = Lock;
     pthread_create(&receiver_thread, NULL, listenThread, Receive_List);
 }
 //thread destructor // public method 

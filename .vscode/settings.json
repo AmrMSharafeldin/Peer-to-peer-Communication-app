@@ -3,6 +3,7 @@
         "socket.h": "c",
         "stdio.h": "c",
         "system_error": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "cmath": "c"
     }
 }
