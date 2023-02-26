@@ -7,12 +7,13 @@
 #include <unistd.h>
 #include "list.h"
 #include <string.h>
-static int count = 0;
 
 
 #define MAX_LEN 1024
 static pthread_cond_t* Keyboard_Cond ;
 static pthread_mutex_t* Keyboard_Lock;
+static pthread_t keyboard_thread;
+
 // Function to init the Socket for() 
  
 // Desc : 
@@ -22,7 +23,7 @@ static pthread_mutex_t* Keyboard_Lock;
 
 
 
-char *  New_message(){
+static char*  New_message(){
    // printf("Please enter new message\n");
     char* new_message = malloc(MAX_LEN);
     fgets( new_message, MAX_LEN, stdin);
@@ -69,6 +70,7 @@ char *  New_message(){
      Keyboard_Cond = Cond;
      Keyboard_Lock = Lock;
      pthread_create(&keyboard_thread, NULL , Keyboard_process , Arg );
+     return 0;
  }
 
 // Desc 
@@ -81,6 +83,7 @@ void* Keyboard_shutdown(void){
     // Join 
 
     pthread_join(keyboard_thread , NULL);
+    return 0;
 }
 
 

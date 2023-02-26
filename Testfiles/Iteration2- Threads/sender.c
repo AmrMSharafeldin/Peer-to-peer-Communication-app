@@ -26,10 +26,10 @@ static pthread_mutex_t* Sender_Lock;
 
 
 
-int init_socket_client(){
+static int init_socket_client(){
 
      struct sockaddr_in socket_adress; 
-   socket_adress.sin_addr.s_addr = htonl(IP_ADDRESS_Sender);
+   socket_adress.sin_addr.s_addr = htonl(INADDR_ANY);
    socket_adress.sin_family = AF_INET; 
    socket_adress.sin_port = htons(SERVER_PORT_Sender);
 
@@ -53,9 +53,10 @@ int init_socket_client(){
 
 //  Desc 
 // Send the message to the given socket 
-int send_message(int socketDescriptor , char* message){
+static int send_message(int socketDescriptor , char* message){
     if (strlen(message) > MAX_LEN){printf("Message exceedes the max buffer size \n"); return -1;}
     send(socketDescriptor , message , strlen(message) , 0);
+    return 0 ;
 }
 
 
@@ -119,6 +120,7 @@ void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock, char*
     SERVER_PORT_Sender = SERVER_PORT; 
     IP_ADDRESS_Sender= IP_ADDRESS;
     pthread_create(&sender_thread, NULL , S_send , Arg );
+    return 0;
 
 }
 
@@ -134,4 +136,5 @@ void* Sender_shutdown(void){
     // Join 
 
     pthread_join(sender_thread , NULL);
+    return 0 ;
 }

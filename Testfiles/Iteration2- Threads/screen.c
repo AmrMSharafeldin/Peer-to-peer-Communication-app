@@ -10,13 +10,14 @@
 static pthread_t Screen_thread;
 static pthread_mutex_t* Screen_Lock;
 static pthread_cond_t* Screen_Cond;
+
 // Desc : 
 
 // Pop from the receive list and prints the message on the screen 
 
 
 
-static void* Print_message(void* Arg){
+ static void* Print_message(void* Arg){
     List* Shared  = (List*)Arg;
     int n;
     while (1)
@@ -30,7 +31,7 @@ static void* Print_message(void* Arg){
             n = List_count(Shared);
             while(n!=0){
                 char* message = List_trim(Shared);
-                //printf("A new message: %s\n", message);
+                printf("A new message: %s\n", message);
                 n--;
                 
             } 
@@ -41,6 +42,7 @@ static void* Print_message(void* Arg){
         fflush(stdout); 
         //free(message); // To Do Fix that bug becasue it gave double free erorr ??
     }
+    return NULL;
 }
 
 
@@ -53,6 +55,7 @@ void*  Screen_init(void* Arg , pthread_cond_t* Cond , pthread_mutex_t* Lock){
     Screen_Cond = Cond;
     Screen_Lock = Lock;
          pthread_create(&Screen_thread, NULL , Print_message , Arg );
+         return 0;
 
 }
 
@@ -66,4 +69,6 @@ void*  Screen_shutdown(void){
     // Join 
 
     pthread_join(Screen_thread , NULL);
+             return 0;
+
 }

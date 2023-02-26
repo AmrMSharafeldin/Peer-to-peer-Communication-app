@@ -1,12 +1,7 @@
-all: listener sender
+all: S_Talk
 
-listener: screen.o receiver.o list.o
-	gcc -Wall -o lisnter screen.o  receiver.o list.o -pthread S_talkReceive.c 
-
-	
-sender: keyboard.o sender.o list.o
-	gcc -Wall -o sender keyboard.o  sender.o list.o -pthread S_talkSend.c
-
+S_Talk: screen.o receiver.o sender.o keyboard.o list.o
+	gcc -Wall -o S_Talk screen.o  receiver.o keyboard.o  sender.o list.o -pthread S_Talk.c 
 
 screen.o: screen.h screen.c list.o
 	gcc -Wall -c screen.c list.o -pthread

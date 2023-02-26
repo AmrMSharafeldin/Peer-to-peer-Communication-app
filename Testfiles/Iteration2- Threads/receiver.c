@@ -6,7 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
-static CLIENT_PORT;
+static short CLIENT_PORT;
 #define MAX_LEN 1024
 static pthread_t receiver_thread;
 static pthread_cond_t* Receiver_Cond ;
@@ -51,7 +51,7 @@ void lis(int sock, void* Receive_List)
 
         int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN - 1;
         messageRx[terminateIdx] = 0;
-        printf("Message received (%d): \n%s \n", bytesRx, messageRx);
+        //printf("Message received (%d): \n%s \n", bytesRx, messageRx);
         
         //mutex lock
         pthread_mutex_lock(Receiver_Lock);

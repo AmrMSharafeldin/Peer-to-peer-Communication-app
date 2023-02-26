@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#ifndef _sender.h
+#ifndef _sender_h
 
 
 //#define PORT 8080
@@ -20,14 +20,14 @@
 // Establishes the connection to this port 
 
 
-static int init_socket_client();
+// static int init_socket_client();
 
 
 
 
 //  Desc 
 // Send the message to the given socket 
-static int send_message(int socketDescriptor , char* message);
+// static int send_message(int socketDescriptor , char* message);
 
 
 

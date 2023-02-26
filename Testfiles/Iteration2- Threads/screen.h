@@ -41,7 +41,7 @@
 #include "list.h"
 #include "receiver.h"
 
-#ifndef _screen.h
+#ifndef _screen_h
 
 
 #define MAX_LEN 1024
@@ -53,7 +53,7 @@
 
 
 
-static void* Print_message();
+//  void* Print_message(void* Arg); // Static functinos should only be declared in the source file 
 
 
 
