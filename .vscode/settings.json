@@ -4,6 +4,7 @@
         "stdio.h": "c",
         "system_error": "c",
         "stdlib.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "string.h": "c"
     }
 }

@@ -27,7 +27,7 @@ static void* Print_message();
 // Desc 
 // Thread init 
 
-void*  Screen_init(void* unused);
+void*  Screen_init(void* unused , pthread_cond_t* Cond , pthread_mutex_t* Lock);
 
 // Desc 
 // Thread shutdown
