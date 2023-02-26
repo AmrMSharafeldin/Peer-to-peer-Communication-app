@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "list.h"
 #include <stdio.h>
-
+#include <ncurses.h>
 static pthread_t Screen_thread;
 static pthread_mutex_t* Screen_Lock;
 static pthread_cond_t* Screen_Cond;
@@ -20,6 +20,7 @@ static pthread_cond_t* Screen_Cond;
  static void* Print_message(void* Arg){
     List* Shared  = (List*)Arg;
     int n;
+    int i = 0 ;
     while (1)
     {
 
@@ -30,16 +31,17 @@ static pthread_cond_t* Screen_Cond;
             }
             n = List_count(Shared);
             while(n!=0){
+                i++;
                 char* message = List_trim(Shared);
-                printf("A new message: %s\n", message);
+                printf("A new message: %d %s\n", i ,message);
                 n--;
                 
             } 
             
         }
         pthread_mutex_unlock(Screen_Lock);
-        fflush(stdin);
-        fflush(stdout); 
+        // fflush(stdin);
+        // fflush(stdout);  // What is this haa? What is this ? ?
         //free(message); // To Do Fix that bug becasue it gave double free erorr ??
     }
     return NULL;

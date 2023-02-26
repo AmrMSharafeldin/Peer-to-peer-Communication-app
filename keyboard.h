@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#ifndef _keyboard.h
+#ifndef _keyboard_h
 
 
 #define MAX_LEN 1024
@@ -17,12 +17,10 @@
 
 // Pushes the new message to the shared list (between keyboard and sender)
 
-static pthread_t keyboard_thread;
-static pthread_cond_t KToSend = PTHREAD_COND_INITIALIZER;
-static pthread_mutex_t LockSender = PTHREAD_MUTEX_INITIALIZER;
 
 
-static char*  New_message();
+
+// static char*  New_message();
 
 
 
@@ -38,7 +36,7 @@ static char*  New_message();
 // Desc 
 // Thread init 
 
-void*  Keyboard_init(void* unused);
+void*  Keyboard_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock);
 
 // Desc 
 // Thread shutdown

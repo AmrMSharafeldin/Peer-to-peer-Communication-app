@@ -6,12 +6,14 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-
+#include <string.h>
 
 
 #define MAX_LEN 1024
 static pthread_cond_t* Keyboard_Cond ;
 static pthread_mutex_t* Keyboard_Lock;
+static pthread_t keyboard_thread;
+
 // Function to init the Socket for() 
  
 // Desc : 
@@ -21,10 +23,14 @@ static pthread_mutex_t* Keyboard_Lock;
 
 
 
-char *  New_message(){
+static char*  New_message(){
    // printf("Please enter new message\n");
     char* new_message = malloc(MAX_LEN);
-    scanf("%s", new_message);
+    fgets( new_message, MAX_LEN, stdin);
+    if((strlen(new_message) > 0)&& (new_message[strlen(new_message)-1] == '\n'))
+    {
+        new_message[strlen(new_message) - 1] = '\0';
+    }
     return new_message;
     // To do : add the exception handleing 
 }
@@ -49,8 +55,9 @@ char *  New_message(){
     } // critical section 
     pthread_mutex_unlock(Keyboard_Lock);
         //mutex unlock
-    pthread_cond_signal(Keyboard_Cond); // Signal a thread 
-     // Debuggin
+    pthread_cond_signal(Keyboard_Cond);
+     // Signal a thread 
+    // Debuggin
     // free(message); // To avoid Mem leaks
     }
 }
@@ -63,6 +70,7 @@ char *  New_message(){
      Keyboard_Cond = Cond;
      Keyboard_Lock = Lock;
      pthread_create(&keyboard_thread, NULL , Keyboard_process , Arg );
+     return 0;
  }
 
 // Desc 
@@ -75,6 +83,7 @@ void* Keyboard_shutdown(void){
     // Join 
 
     pthread_join(keyboard_thread , NULL);
+    return 0;
 }
 
 

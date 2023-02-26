@@ -4,12 +4,13 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#include "keyboard.h"
-#ifndef _sender.h
+#ifndef _sender_h
 
 
-#define PORT 8080
+//#define PORT 8080
 #define MAX_LEN 1024
+
+
 
 // Function to init the Socket for() 
  
@@ -19,14 +20,14 @@
 // Establishes the connection to this port 
 
 
-static int init_socket_client();
+// static int init_socket_client();
 
 
 
 
 //  Desc 
 // Send the message to the given socket 
-static int send_message(int socketDescriptor , char* message);
+// static int send_message(int socketDescriptor , char* message);
 
 
 
@@ -41,7 +42,7 @@ void Send_thread() ;
 // Desc 
 // Thread init 
 
-void* Sender_init(void* unused);
+void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock, char* IP_ADDRESS  , short SERVER_PORT);
 
 // Desc 
 // Thread shutdown

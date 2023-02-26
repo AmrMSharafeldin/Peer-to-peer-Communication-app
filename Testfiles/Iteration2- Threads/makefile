@@ -1,7 +1,7 @@
 all: S_Talk
 
 S_Talk: screen.o receiver.o sender.o keyboard.o list.o
-	gcc -Wall -o S_Talk screen.o  receiver.o keyboard.o  sender.o list.o -pthread S_Talk.c 
+	gcc -Wall -o S_Talk screen.o  receiver.o keyboard.o  sender.o list.o -pthread -lncurses S_Talk.c 
 
 screen.o: screen.h screen.c list.o
 	gcc -Wall -c screen.c list.o -pthread
