@@ -6,7 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#define PORT 8080
+static CLIENT_PORT;
 #define MAX_LEN 1024
 static pthread_t receiver_thread;
 static pthread_cond_t* Receiver_Cond ;
@@ -20,7 +20,7 @@ int init_socket_receiver()
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = htonl(INADDR_ANY);
-    sin.sin_port = htons(PORT);
+    sin.sin_port = htons(CLIENT_PORT);
     int socketDescriptor = socket(PF_INET, SOCK_DGRAM, 0);
     if (socketDescriptor < 0){
         printf("socket connection failed\n");
@@ -40,7 +40,7 @@ void lis(int sock, void* Receive_List)
 {struct sockaddr_in sinRemote;
 
     if(sock == -1)
-        return 0;
+        return;
     List* Shared = (List*)Receive_List;
     while (1)
     {
@@ -72,15 +72,19 @@ void *listenThread(void *Receive_List)
 {
     int desc = init_socket_receiver();
     lis(desc, Receive_List);
+    return 0;
 }
 //thread initializer // public method
-void* Receiver_init(void* Receive_List , pthread_cond_t* Cond , pthread_mutex_t* Lock)
+void* Receiver_init(void* Receive_List , pthread_cond_t* Cond , pthread_mutex_t* Lock, short client)
 {   Receiver_Cond = Cond; 
     Receiver_Lock = Lock;
+    CLIENT_PORT = client;
     pthread_create(&receiver_thread, NULL, listenThread, Receive_List);
+    return 0;
 }
 //thread destructor // public method 
 void* Receiver_shutdown(void)
 {
     pthread_join(receiver_thread, NULL);
+    return 0;
 }
