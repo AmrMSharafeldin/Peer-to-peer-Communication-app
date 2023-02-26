@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
     short CLIENT_PORT = atoi(argv[1]);
     char* IP_ADDRESS = argv[2];
     short SERVER_PORT = atoi(argv[3]);
-    printf("client port%d, ip %s, server port %d\n");
+    printf("client port%d, ip %s, server port %d\n", CLIENT_PORT, IP_ADDRESS, SERVER_PORT);
      pthread_cond_t KToSend  = PTHREAD_COND_INITIALIZER;
  pthread_mutex_t LockSender = PTHREAD_MUTEX_INITIALIZER;
     List* input_list = List_create(); 
