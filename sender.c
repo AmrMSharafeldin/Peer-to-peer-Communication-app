@@ -102,11 +102,13 @@ void* S_send(void* Send_list){
     }
     char* message = List_trim(Shared); //   Critical Section 
     if(strcmp(message , "!") == 0){
+            { printf("Connection is terminated\n");
         Cancel_Keyboard();
         Cancel_Receiver();
         Cancel_Screen();
         pthread_mutex_unlock(Sender_Lock);
         return 0 ;
+            }
     }
     printf("%d sender\n" , List_count(Shared)); // Debuggin
     send_message(socket_Descriptor , message);        
