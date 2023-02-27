@@ -67,4 +67,6 @@ void*  Screen_init(void* unused , pthread_cond_t* Cond , pthread_mutex_t* Lock);
 // Thread shutdown
 void*  Screen_shutdown(void);
 
+
+void Cancel_Screen();
 #endif

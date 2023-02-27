@@ -4,6 +4,9 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
+#include "keyboard.h"
+#include "screen.h"
+#include "receiver.h"
 #ifndef _sender_h
 
 
@@ -48,6 +51,8 @@ void* Sender_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock, char*
 // Thread shutdown
 void* Sender_shutdown(void);
 
+
+void Cancel_Sender();
 
 
 

@@ -12,8 +12,8 @@ keyboard.o: keyboard.h keyboard.c list.o
 receiver.o: receiver.h receiver.c list.o
 	gcc -Wall -c receiver.c list.o -pthread
 
-sender.o: sender.h sender.c list.o
-	gcc -Wall -c sender.c list.o -pthread
+sender.o: sender.h sender.c list.o receiver.o keyboard.o screen.o
+	gcc -Wall -c sender.c list.o receiver.o keyboard.o screen.o -pthread
 
 clean: 
 	rm -f *.o

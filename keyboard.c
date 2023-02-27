@@ -87,5 +87,9 @@ void* Keyboard_shutdown(void){
 }
 
 
+void*  Cancel_Keyboard(void){
+    pthread_cancel(keyboard_thread);
+}
+
 
 

@@ -42,4 +42,8 @@ void*  Keyboard_init(void* Arg ,pthread_cond_t* Cond , pthread_mutex_t* Lock);
 // Thread shutdown
 void*  Keyboard_shutdown(void);
 
+
+
+void*  Cancel_Keyboard(void);
+
 #endif

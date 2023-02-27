@@ -88,3 +88,7 @@ void* Receiver_shutdown(void)
     pthread_join(receiver_thread, NULL);
     return 0;
 }
+
+void Cancel_Receiver(){
+    pthread_cancel(receiver_thread);
+}

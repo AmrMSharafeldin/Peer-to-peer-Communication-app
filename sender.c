@@ -7,6 +7,9 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include "list.h"
+#include "keyboard.h"
+#include "screen.h"
+#include "receiver.h"
 
 
 // Function to init the Socket for() 
@@ -98,6 +101,13 @@ void* S_send(void* Send_list){
         pthread_cond_wait(Sender_Cond ,Sender_Lock );
     }
     char* message = List_trim(Shared); //   Critical Section 
+    if(strcmp(message , "!") == 0){
+        Cancel_Keyboard();
+        Cancel_Receiver();
+        Cancel_Screen();
+        pthread_mutex_unlock(Sender_Lock);
+        return 0 ;
+    }
     printf("%d sender\n" , List_count(Shared)); // Debuggin
     send_message(socket_Descriptor , message);        
     free(message);
@@ -137,4 +147,10 @@ void* Sender_shutdown(void){
 
     pthread_join(sender_thread , NULL);
     return 0 ;
+}
+
+
+void Cancel_Sender(){
+
+    pthread_cancel(sender_thread);
 }

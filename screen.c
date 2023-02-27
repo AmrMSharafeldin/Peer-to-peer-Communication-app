@@ -74,3 +74,8 @@ void*  Screen_shutdown(void){
              return 0;
 
 }
+
+
+void Cancel_Screen(){
+    pthread_cancel(Screen_thread);
+}
