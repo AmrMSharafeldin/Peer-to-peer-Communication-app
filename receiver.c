@@ -46,7 +46,7 @@ void lis(int sock, void* Receive_List)
     {
 
         unsigned int sin_len = sizeof(sinRemote);
-        char messageRx[MAX_LEN];
+        char* messageRx = malloc(MAX_LEN); // Modified this part so that the buffer is dynamically allocated 
         int bytesRx = recvfrom(sock, messageRx, MAX_LEN, 0, (struct sockaddr *)&sinRemote, &sin_len);
 
         int terminateIdx = (bytesRx < MAX_LEN) ? bytesRx : MAX_LEN - 1;

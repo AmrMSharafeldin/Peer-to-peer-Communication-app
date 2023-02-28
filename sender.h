@@ -1,12 +1,13 @@
+
+
 #include <pthread.h>
-#include <sys/socket.h>
-#include <stdlib.h>
+#include <stdio.h>
+#include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/socket.h>
 #include "list.h"
-#include "keyboard.h"
-#include "screen.h"
-#include "receiver.h"
+#include "ThreadCancelHandler.h"
 #ifndef _sender_h
 
 
