@@ -97,8 +97,8 @@ void* Keyboard_shutdown(void){
 
 void*  Cancel_Keyboard(void){
     pthread_cancel(keyboard_thread);
-    // pthread_cond_destroy(Keyboard_Cond); //keyboard.h has the function
-    // pthread_mutex_destroy(Keyboard_Lock); // keyboard.h has the function //////BREAKS HERE
+    pthread_cond_destroy(Keyboard_Cond); //keyboard.h has the function
+    pthread_mutex_destroy(Keyboard_Lock); // keyboard.h has the function //////BREAKS HERE
 }
 
 

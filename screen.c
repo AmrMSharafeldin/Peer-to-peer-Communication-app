@@ -35,7 +35,7 @@ static List* aList;
                 if(strcmp(message, "!") == 0)
                 {
                     printf("!The connection was terminated\n");
-                    Cancel_threads();
+                    Cancel_threads(true);
                     Cancel_Screen();
                     
                    

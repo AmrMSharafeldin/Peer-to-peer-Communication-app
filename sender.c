@@ -106,7 +106,7 @@ void* S_send(void* Send_list){
             {   send_message(socket_Descriptor , message);
                 free(message);
                 printf("Connection is terminated\n");
-                Cancel_threads();
+                Cancel_threads(false);
                 Cancel_Sender(); 
             }
     }
@@ -159,5 +159,7 @@ void Cancel_Sender(){
 
     pthread_cancel(sender_thread);
     List_free(aList, Free_char);
+     pthread_cond_destroy(Sender_Cond); //keyboard.h has the function
+    pthread_mutex_destroy(Sender_Lock); // keyboard.h has the function //////BREAKS HERE
     close(sD);
 }
