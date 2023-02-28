@@ -33,7 +33,9 @@ static pthread_cond_t* Screen_Cond;
             while(n!=0){
                 i++;
                 char* message = List_trim(Shared);
+                
                 printf("A new message: %d %s\n", i ,message);
+                free(message); // To Do Fix that bug becasue it gave double free erorr ?? // Fixed
                 n--;
                 
             } 
@@ -42,7 +44,6 @@ static pthread_cond_t* Screen_Cond;
         pthread_mutex_unlock(Screen_Lock);
         // fflush(stdin);
         // fflush(stdout);  // What is this haa? What is this ? ?
-        //free(message); // To Do Fix that bug becasue it gave double free erorr ??
     }
     return NULL;
 }

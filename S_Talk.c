@@ -11,6 +11,10 @@
 #include "list.h"
 
 
+void Free_char(char* str){
+    free(str);
+}
+
 int main(int argc, char* argv[]){
    
     if(argc != 4)
@@ -33,9 +37,11 @@ int main(int argc, char* argv[]){
     Keyboard_init(input_list,&KToSender , &LockSender);
     Receiver_init(display_list , &KToReceiver , &LockReceiver  , CLIENT_PORT);
     Screen_init(display_list,&KToReceiver , &LockReceiver);
+
+   
     Sender_shutdown();
     Keyboard_shutdown();
-    Receiver_shutdown();
-    Screen_shutdown(); 
+     Receiver_shutdown();
+    Screen_shutdown();
     return 0;
 }
