@@ -41,7 +41,11 @@ static List* aList;
                    
                     //exit(0);
                 }
-                printf("A new message: %s\n",message);
+                if(strcmp(message, "!") != 0){
+                    printf("A new message: %s\n",message);
+                    
+                }
+                
                 free(message); // To Do Fix that bug becasue it gave double free erorr ?? // Fixed
                 n--;
             } 
@@ -49,7 +53,7 @@ static List* aList;
         }
         pthread_mutex_unlock(Screen_Lock);
         // fflush(stdin);
-        // fflush(stdout);  // What is this haa? What is this ? ?
+           // What is this haa? What is this ? ?
     }
     return NULL;
 }

@@ -54,6 +54,7 @@ static char*  New_message(){
          List* Shared  = (List*)Arg;
     while (1)
     {
+        
     char* message = New_message();
       // Critical section;
     //mutex lock
