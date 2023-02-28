@@ -6,6 +6,7 @@
         "stdlib.h": "c",
         "cmath": "c",
         "string.h": "c",
-        "string": "c"
+        "string": "c",
+        "threadcancelhandler.h": "c"
     }
 }

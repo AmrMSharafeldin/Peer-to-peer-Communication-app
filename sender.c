@@ -103,7 +103,9 @@ void* S_send(void* Send_list){
     }
     char* message = List_trim(Shared); //   Critical Section 
     if(strcmp(message , "!") == 0){
-            { printf("Connection is terminated\n");
+            {   send_message(socket_Descriptor , message);
+                free(message);
+                printf("Connection is terminated\n");
                 Cancel_threads();
                 Cancel_Sender(); 
             }

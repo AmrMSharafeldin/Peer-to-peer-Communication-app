@@ -1,8 +1,10 @@
+#include "list.h"
 #include <pthread.h>
-#include <sys/socket.h>
-#include <stdlib.h>
+#include <stdio.h>
+#include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/socket.h>
 
 //int init_socket_receiver(); 
 

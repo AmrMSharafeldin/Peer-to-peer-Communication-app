@@ -6,7 +6,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include <string.h>
 static short CLIENT_PORT;
 #define MAX_LEN 1024
 static pthread_t receiver_thread;

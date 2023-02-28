@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "list.h"
 #include <stdio.h>
+#include "ThreadCancelHandler.h"
 #include <ncurses.h>
 static pthread_t Screen_thread;
 static pthread_mutex_t* Screen_Lock;
@@ -20,7 +21,6 @@ static List* aList;
  static void* Print_message(void* Arg){
     List* Shared  = aList =  (List*)Arg;
     int n;
-    int i = 0 ;
     while (1)
     {
 
@@ -31,13 +31,17 @@ static List* aList;
             }
             n = List_count(Shared);
             while(n!=0){
-                i++;
                 char* message = List_trim(Shared);
-                
-                printf("A new message: %d %s\n", i ,message);
+                if(strcmp(message, "!") == 0)
+                {
+                    printf("!The connection was terminated\n");
+                    Cancel_threads();
+                    Cancel_Screen();
+                    exit(0);
+                }
+                printf("A new message: %s\n",message);
                 free(message); // To Do Fix that bug becasue it gave double free erorr ?? // Fixed
                 n--;
-                
             } 
             
         }
