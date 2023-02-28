@@ -59,7 +59,7 @@ static char*  New_message(){
     //mutex lock
     pthread_mutex_lock(Keyboard_Lock);
     {List_append(Shared , message);
-    printf("%d keyboard\n" , List_count(Shared));
+   // printf("%d keyboard\n" , List_count(Shared)); // debugging 
     } // critical section 
     pthread_mutex_unlock(Keyboard_Lock);
         //mutex unlock

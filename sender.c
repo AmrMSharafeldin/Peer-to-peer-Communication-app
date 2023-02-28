@@ -110,7 +110,7 @@ void* S_send(void* Send_list){
                 Cancel_Sender(); 
             }
     }
-    printf("%d sender\n" , List_count(Shared)); // Debuggin
+   // printf("%d sender\n" , List_count(Shared)); // Debuggin
     send_message(socket_Descriptor , message);        
     free(message);
     printf("%d message is sent\n", ++counter);

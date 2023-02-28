@@ -34,7 +34,7 @@ static List* aList;
                 char* message = List_trim(Shared);
                 if(strcmp(message, "!") == 0)
                 {
-                    printf("!The connection was terminated\n");
+                    printf("The connection was terminated by the sender\n");
                     Cancel_threads(true);
                     Cancel_Screen();
                     
