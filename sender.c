@@ -102,7 +102,7 @@ void* S_send(void* Send_list){
     if(strcmp(message , "!") == 0){
             { printf("Connection is terminated\n");
                 Cancel_threads();
-                Cancel_Sender();
+                Cancel_Sender(); 
             }
     }
     printf("%d sender\n" , List_count(Shared)); // Debuggin

@@ -38,11 +38,12 @@ int main(int argc, char* argv[]){
     Receiver_init(display_list , &KToReceiver , &LockReceiver  , CLIENT_PORT);
     Screen_init(display_list,&KToReceiver , &LockReceiver);
 
-    List_free(input_list , Free_char);
-    List_free(display_list , Free_char);
+   
     Sender_shutdown();
     Keyboard_shutdown();
      Receiver_shutdown();
     Screen_shutdown();
+     List_free(input_list , Free_char);
+    List_free(display_list , Free_char);
     return 0;
 }
