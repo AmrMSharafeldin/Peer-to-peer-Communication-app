@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
     Screen_init(display_list,&KToReceiver , &LockReceiver);
     Sender_shutdown();
     Keyboard_shutdown();
-     Receiver_shutdown();
-    Screen_shutdown();
+    Receiver_shutdown();
+    Screen_shutdown(); 
     return 0;
 }
