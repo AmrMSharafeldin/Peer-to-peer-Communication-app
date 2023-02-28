@@ -16,7 +16,7 @@ sender.o: sender.h sender.c list.o  ThreadCancelHandler.o
 	gcc -Wall -c sender.c list.o  ThreadCancelHandler.o  -pthread
 
 
-ThreadCancelHandler.o : ThreadCancelHandler.h ThreadCancelHandler.c  receiver.o keyboard.o screen.o
-	gcc -Wall -c ThreadCancelHandler.c receiver.o keyboard.o screen.o -pthread
+ThreadCancelHandler.o: ThreadCancelHandler.h ThreadCancelHandler.c 
+	gcc -Wall -c ThreadCancelHandler.c  -pthread
 clean: 
 	rm -f *.o

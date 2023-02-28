@@ -39,7 +39,7 @@ static List* aList;
                     Cancel_Screen();
                     
                    
-                    exit(0);
+                    //exit(0);
                 }
                 printf("A new message: %s\n",message);
                 free(message); // To Do Fix that bug becasue it gave double free erorr ?? // Fixed
