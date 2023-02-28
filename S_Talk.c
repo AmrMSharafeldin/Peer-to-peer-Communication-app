@@ -37,11 +37,5 @@ int main(int argc, char* argv[]){
     Keyboard_shutdown();
     Receiver_shutdown();
     Screen_shutdown();
-    // pthread_cond_destroy(&KToReceiver);
-    // pthread_cond_destroy(&KToSender);
-    // pthread_mutex_destroy(&LockSender);
-    // pthread_mutex_destroy(&LockReceiver);
-    printf("%d", List_count(display_list));
-    printf("%d", List_count(input_list));
     return 0;
 }
