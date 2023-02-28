@@ -10,7 +10,7 @@
 static pthread_t Screen_thread;
 static pthread_mutex_t* Screen_Lock;
 static pthread_cond_t* Screen_Cond;
-
+static List* aList;
 // Desc : 
 
 // Pop from the receive list and prints the message on the screen 
@@ -18,7 +18,7 @@ static pthread_cond_t* Screen_Cond;
 
 
  static void* Print_message(void* Arg){
-    List* Shared  = (List*)Arg;
+    List* Shared  = aList =  (List*)Arg;
     int n;
     int i = 0 ;
     while (1)
@@ -76,7 +76,11 @@ void*  Screen_shutdown(void){
 
 }
 
+static void Free_char(void* str){
+    free(str);
+}
 
 void Cancel_Screen(){
     pthread_cancel(Screen_thread);
+    List_free(aList, Free_char);
 }

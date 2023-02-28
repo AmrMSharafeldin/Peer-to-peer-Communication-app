@@ -11,10 +11,6 @@
 #include "list.h"
 
 
-void Free_char(char* str){
-    free(str);
-}
-
 int main(int argc, char* argv[]){
    
     if(argc != 4)
@@ -35,13 +31,17 @@ int main(int argc, char* argv[]){
     printf("starting\n");
     Sender_init(input_list , &KToSender , &LockSender , IP_ADDRESS , SERVER_PORT);
     Keyboard_init(input_list,&KToSender , &LockSender);
-    Receiver_init(display_list , &KToReceiver , &LockReceiver  , CLIENT_PORT);
+    Receiver_init(display_list , &KToReceiver , &LockReceiver  , CLIENT_PORT, IP_ADDRESS);
     Screen_init(display_list,&KToReceiver , &LockReceiver);
-
-   
     Sender_shutdown();
     Keyboard_shutdown();
-     Receiver_shutdown();
+    Receiver_shutdown();
     Screen_shutdown();
+    pthread_cond_destroy(&KToReceiver);
+    pthread_cond_destroy(&KToSender);
+    pthread_mutex_destroy(&LockSender);
+    pthread_mutex_destroy(&LockReceiver);
+    printf("%d", List_count(display_list));
+    printf("%d", List_count(input_list));
     return 0;
 }

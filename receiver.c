@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <string.h>
 static short CLIENT_PORT;
 #define MAX_LEN 1024
 static pthread_t receiver_thread;
@@ -13,7 +14,8 @@ static pthread_cond_t* Receiver_Cond ;
 static pthread_mutex_t* Receiver_Lock;
 //initialize the socket and bind it to specific port
 //
-
+static int FileDescriptor;
+static char* IP_ADDR;
 int init_socket_receiver()
 {
     struct sockaddr_in sin;
@@ -32,6 +34,7 @@ int init_socket_receiver()
         printf("bind failed\n");
         return -1;
     }
+    FileDescriptor = socketDescriptor;
     return socketDescriptor;
 }
 //listening body, contains the critical section problem
@@ -75,10 +78,12 @@ void *listenThread(void *Receive_List)
     return 0;
 }
 //thread initializer // public method
-void* Receiver_init(void* Receive_List , pthread_cond_t* Cond , pthread_mutex_t* Lock, short client)
+void* Receiver_init(void* Receive_List , pthread_cond_t* Cond , pthread_mutex_t* Lock, short client, char* IP)
 {   Receiver_Cond = Cond; 
     Receiver_Lock = Lock;
     CLIENT_PORT = client;
+    IP_ADDR = IP;
+
     pthread_create(&receiver_thread, NULL, listenThread, Receive_List);
     return 0;
 }
@@ -91,4 +96,5 @@ void* Receiver_shutdown(void)
 
 void Cancel_Receiver(){
     pthread_cancel(receiver_thread);
+    close(FileDescriptor);
 }

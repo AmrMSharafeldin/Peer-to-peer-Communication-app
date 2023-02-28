@@ -20,10 +20,12 @@
 static pthread_t sender_thread;
 static pthread_cond_t* Sender_Cond ;
 static pthread_mutex_t* Sender_Lock;
+static List* aList;
+static int sD;
 
 // Connection parameter 
-    char* IP_ADDRESS_Sender ; 
-    short SERVER_PORT_Sender ;
+char* IP_ADDRESS_Sender ; 
+short SERVER_PORT_Sender ;
 
 
 
@@ -46,6 +48,7 @@ static int init_socket_client(){
         return -1; 
     }
     printf("new socket created and conncection established\n");
+    sD = socketDescriptor;
    return socketDescriptor;
 }
 
@@ -88,7 +91,7 @@ void* S_send(void* Send_list){
     // fflush(stdout);
     // free(message);
     // ***********
-    List* Shared = (List*)Send_list;
+    List* Shared = aList = (List*)Send_list;
      int counter = 0 ;
     while (1)
     {    printf("Please enter the message\n");
@@ -146,8 +149,13 @@ void* Sender_shutdown(void){
     return 0 ;
 }
 
+static void Free_char(void* str){
+    free(str);
+}
 
 void Cancel_Sender(){
 
     pthread_cancel(sender_thread);
+    List_free(aList, Free_char);
+    close(sD);
 }
