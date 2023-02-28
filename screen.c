@@ -37,6 +37,8 @@ static List* aList;
                     printf("!The connection was terminated\n");
                     Cancel_threads();
                     Cancel_Screen();
+                    
+                   
                     exit(0);
                 }
                 printf("A new message: %s\n",message);
@@ -86,5 +88,7 @@ static void Free_char(void* str){
 
 void Cancel_Screen(){
     pthread_cancel(Screen_thread);
+    pthread_cond_destroy(Screen_Cond);
     List_free(aList, Free_char);
+     pthread_mutex_destroy(Screen_Lock);
 }

@@ -21,6 +21,14 @@ static pthread_t keyboard_thread;
 // Asks the user input and Allocated memory to store the message 
 
 
+pthread_cond_t* retCond()
+{
+    return Keyboard_Cond;
+}
+pthread_mutex_t* retMutex()
+{
+    return Keyboard_Lock;
+}
 
 
 static char*  New_message(){
@@ -89,6 +97,8 @@ void* Keyboard_shutdown(void){
 
 void*  Cancel_Keyboard(void){
     pthread_cancel(keyboard_thread);
+    // pthread_cond_destroy(Keyboard_Cond); //keyboard.h has the function
+    // pthread_mutex_destroy(Keyboard_Lock); // keyboard.h has the function //////BREAKS HERE
 }
 
 

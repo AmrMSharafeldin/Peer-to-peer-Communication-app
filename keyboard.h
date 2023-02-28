@@ -25,7 +25,8 @@
 
 
 
-
+pthread_cond_t* retCond();
+pthread_mutex_t* retMutex();
 // Desc 
 // Thread init 
 

@@ -5,7 +5,6 @@
 #include "receiver.h"
 
 
-
 void Cancel_threads(){
     Cancel_Receiver();
     Cancel_Screen();
