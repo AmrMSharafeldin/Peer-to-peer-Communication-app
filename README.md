@@ -11,7 +11,7 @@ Key features of the application include:
 - **Concurrency Control**: Concurrency issues were resolved using mutexes and condition variables to avoid race conditions and ensure data consistency across threads.
 
 This design allows smooth and efficient real-time communication between two terminals in a peer-to-peer network.  
-![Diagram](Media/Incoming Messages.gif)
+
 ---
 
 ## **How It Works** 
@@ -26,7 +26,7 @@ This section explains the core algorithm of the application. Here's how it works
 
 ---
 
-
+![Diagram](Media/Incoming Messages.gif)
 ## **How to Run It**
 
 1. **Clone the Repository**:
