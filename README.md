@@ -10,8 +10,8 @@ Key features of the application include:
 - **Concurrent Processes**: Developed four concurrent processes: listen, send, receive, and add message, each running as independent threads.
 - **Concurrency Control**: Concurrency issues were resolved using mutexes and condition variables to avoid race conditions and ensure data consistency across threads.
 
-This design allows smooth and efficient real-time communication between two terminals in a peer-to-peer network.
-
+This design allows smooth and efficient real-time communication between two terminals in a peer-to-peer network. 
+![Diagram](Media/Incoming Messages.gif)
 ---
 
 ## **How It Works** 
@@ -25,7 +25,7 @@ This section explains the core algorithm of the application. Here's how it works
 - The app runs in a continuous loop, allowing for real-time communication between peers.
 
 ---
-![Diagram](Media/Incoming Messages.gif)
+
 
 ## **How to Run It**
 
