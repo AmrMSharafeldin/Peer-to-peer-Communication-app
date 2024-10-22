@@ -26,7 +26,7 @@ This section explains the core algorithm of the application. Here's how it works
 
 
 
-![Diagram]()
+![Diagram](Media/diagram.gif)
 ## **How to Run It**
 
 1. **Clone the Repository**:
