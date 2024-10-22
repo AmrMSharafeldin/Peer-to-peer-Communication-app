@@ -24,7 +24,7 @@ This section explains the core algorithm of the application. Here's how it works
 - **Concurrency Management**: Locks and condition variables ensure there are no race conditions when accessing shared resources like message queues.
 - The app runs in a continuous loop, allowing for real-time communication between peers.
 
-![Diagram](Transformer/visualization/Figure1.jpg)
+![Diagram](Media/Incoming Messages(1).gif
 
 ---
 
