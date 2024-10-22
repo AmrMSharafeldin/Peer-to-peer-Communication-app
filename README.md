@@ -45,4 +45,4 @@ Note: Ensure the client port in Terminal 1 is the server port in Terminal 2, and
 5. **To Stop the App**: If you wish to stop the application entirely, use Ctrl+C to stop it on both terminals.  
 
 ## **Demo**
-![Diagram](Media/demo.mp4)
+![Diagram](Media/demo.gif)
