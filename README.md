@@ -42,4 +42,7 @@ This section explains the core algorithm of the application. Here's how it works
 Note: Ensure the client port in Terminal 1 is the server port in Terminal 2, and vice versa.  
 3. **Start Chatting**: Once the application is running on both terminals, you can start sending and receiving messages in real-time.  
 4. **Quit the Application**: To quit one of the clients, simply type `!` and press Enter.  
-5. **To Stop the App**: If you wish to stop the application entirely, use Ctrl+C to stop it on both terminals.
+5. **To Stop the App**: If you wish to stop the application entirely, use Ctrl+C to stop it on both terminals.  
+
+## **Demo**
+![Diagram](Media/demo.mp4)
