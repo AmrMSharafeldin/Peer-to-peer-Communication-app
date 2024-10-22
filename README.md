@@ -29,8 +29,17 @@ This section explains the core algorithm of the application. Here's how it works
 ![Diagram](Media/diagram.gif)
 ## **How to Run It**
 
-1. **Clone the Repository**:
-   Download the project files by cloning the repository to your local machine:
+1. **Build the project**:
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   make
+2. **Run the Application: Open two separate terminal windows (on the same or different machines within the same network):**:
+- **Terminal 1**: Terminal 1: Start the application using the following command:
+  ```bash
+  ./S_Talk.c CLIENT_PORT IP_ADDRESS SERVER_PORT
+- **Terminal 2**: Start the application on the second machine/terminal using:
+  ```bash
+  ./S_Talk.c CLIENT_PORT IP_ADDRESS SERVER_PORT
+Note: Ensure the client port in Terminal 1 is the server port in Terminal 2, and vice versa.  
+3. **Start Chatting**: Once the application is running on both terminals, you can start sending and receiving messages in real-time.  
+4. **Quit the Application**: To quit one of the clients, simply type `!` and press Enter.  
+5. **To Stop the App**: If you wish to stop the application entirely, use Ctrl+C to stop it on both terminals.
