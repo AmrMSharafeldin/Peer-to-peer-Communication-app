@@ -7,7 +7,6 @@
 #include "list.h"
 #include <stdio.h>
 #include "ThreadCancelHandler.h"
-#include <ncurses.h>
 static pthread_t Screen_thread;
 static pthread_mutex_t* Screen_Lock;
 static pthread_cond_t* Screen_Cond;
