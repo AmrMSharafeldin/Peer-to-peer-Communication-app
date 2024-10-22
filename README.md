@@ -25,7 +25,6 @@ This section explains the core algorithm of the application. Here's how it works
 - The app runs in a continuous loop, allowing for real-time communication between peers.
 
 ![Diagram](Media/Incoming Messages (1).gif)
-
 ---
 
 ## **How to Run It**
